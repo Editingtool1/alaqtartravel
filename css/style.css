@@ -1,0 +1,470 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #7b1734;
+    --primary-dark: #571025;
+    --primary-light: #9d3150;
+    --dark: #25272b;
+    --gray: #70747b;
+    --light-gray: #f4f5f7;
+    --white: #ffffff;
+    --border: #e4e6ea;
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    background: #ffffff;
+    color: var(--dark);
+    direction: rtl;
+}
+
+.container {
+    width: min(1200px, 92%);
+    margin: auto;
+}
+
+/* ==============================
+   HEADER
+================================ */
+
+.header {
+    height: 88px;
+    background: rgba(255, 255, 255, 0.98);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 255px;
+}
+
+.logo-mark {
+    width: 48px;
+    height: 48px;
+    border-radius: 13px;
+    background: linear-gradient(
+        135deg,
+        var(--primary),
+        var(--primary-light)
+    );
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    font-weight: 800;
+}
+
+.logo h1 {
+    color: var(--primary);
+    font-size: 17px;
+    line-height: 1.4;
+}
+
+.logo span {
+    display: block;
+    direction: ltr;
+    font-size: 9px;
+    letter-spacing: 1px;
+    color: var(--gray);
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    flex: 1;
+}
+
+.nav a {
+    text-decoration: none;
+    color: #40434a;
+    font-size: 14px;
+    font-weight: 600;
+    transition: 0.25s;
+    position: relative;
+}
+
+.nav a:hover,
+.nav a.active {
+    color: var(--primary);
+}
+
+.nav a.active::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: -12px;
+    height: 3px;
+    border-radius: 5px;
+    background: var(--primary);
+}
+
+.login-btn {
+    font-family: inherit;
+    background: var(--primary);
+    color: white;
+    border: 0;
+    border-radius: 9px;
+    padding: 11px 19px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.25s;
+    white-space: nowrap;
+}
+
+.login-btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+}
+
+/* ==============================
+   HERO
+================================ */
+
+.hero {
+    min-height: 590px;
+    padding: 80px 5% 70px;
+    background:
+        linear-gradient(
+            110deg,
+            rgba(52, 15, 28, 0.94),
+            rgba(123, 23, 52, 0.82)
+        ),
+        linear-gradient(
+            135deg,
+            #34363c,
+            #7b1734
+        );
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    width: 550px;
+    height: 550px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 50%;
+    top: -250px;
+    left: -100px;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 50%;
+    right: -150px;
+    bottom: -200px;
+}
+
+.hero-content {
+    text-align: center;
+    color: white;
+    margin-bottom: 38px;
+    position: relative;
+    z-index: 2;
+}
+
+.hero-small {
+    display: inline-block;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.18);
+    padding: 7px 18px;
+    border-radius: 50px;
+    font-size: 13px;
+    margin-bottom: 15px;
+}
+
+.hero-content h2 {
+    font-size: clamp(35px, 5vw, 56px);
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.hero-content h2 strong {
+    color: #ffffff;
+    font-weight: 800;
+}
+
+.hero-content p {
+    font-size: 17px;
+    margin-top: 7px;
+    color: rgba(255,255,255,0.83);
+}
+
+/* ==============================
+   BOOKING BOX
+================================ */
+
+.booking-box {
+    width: min(1150px, 96%);
+    background: white;
+    padding: 25px;
+    border-radius: 18px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.22);
+    position: relative;
+    z-index: 5;
+}
+
+.trip-types {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    margin-bottom: 19px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border);
+}
+
+.trip-types label {
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.trip-types input {
+    accent-color: var(--primary);
+    margin-left: 5px;
+}
+
+.search-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+}
+
+.field label {
+    font-size: 11px;
+    color: var(--gray);
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+.field input,
+.field select {
+    width: 100%;
+    height: 48px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0 10px;
+    font-family: inherit;
+    outline: none;
+    background: white;
+    color: var(--dark);
+    transition: 0.2s;
+}
+
+.field input:focus,
+.field select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(123,23,52,0.08);
+}
+
+.search-btn {
+    display: block;
+    margin: 22px auto 0;
+    min-width: 210px;
+    height: 50px;
+    border: 0;
+    border-radius: 9px;
+    background: var(--primary);
+    color: white;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.search-btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(123,23,52,0.25);
+}
+
+/* ==============================
+   SERVICES
+================================ */
+
+.services {
+    padding: 90px 5%;
+    background: #fafafa;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.section-title span {
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.section-title h2 {
+    font-size: 32px;
+    margin-top: 5px;
+    color: var(--dark);
+}
+
+.section-title p {
+    color: var(--gray);
+    margin-top: 7px;
+    font-size: 14px;
+}
+
+.services-grid {
+    width: min(1150px, 100%);
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.service-card {
+    background: white;
+    padding: 35px 24px;
+    border: 1px solid #eeeeee;
+    border-radius: 15px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.service-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+    border-color: rgba(123,23,52,0.18);
+}
+
+.service-icon {
+    width: 65px;
+    height: 65px;
+    background: rgba(123,23,52,0.08);
+    color: var(--primary);
+    border-radius: 16px;
+    margin: 0 auto 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 27px;
+}
+
+.service-card h3 {
+    font-size: 17px;
+    margin-bottom: 10px;
+}
+
+.service-card p {
+    font-size: 13px;
+    color: var(--gray);
+    line-height: 1.9;
+}
+
+/* ==============================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 1050px) {
+
+    .nav {
+        display: none;
+    }
+
+    .search-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 650px) {
+
+    .header {
+        height: 75px;
+    }
+
+    .logo h1 {
+        font-size: 14px;
+    }
+
+    .logo span {
+        font-size: 7px;
+    }
+
+    .logo-mark {
+        width: 41px;
+        height: 41px;
+    }
+
+    .login-btn {
+        padding: 9px 12px;
+        font-size: 11px;
+    }
+
+    .hero {
+        padding: 60px 3% 50px;
+    }
+
+    .hero-content h2 {
+        font-size: 35px;
+    }
+
+    .hero-content p {
+        font-size: 14px;
+    }
+
+    .booking-box {
+        padding: 18px;
+    }
+
+    .search-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .section-title h2 {
+        font-size: 25px;
+    }
+}
