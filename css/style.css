@@ -478,4 +478,46 @@ body {
         height: 55px !important;
         max-height: 55px !important;
     }
+}/* ===== OFFICIAL ALAQTAR HEADER LOGO ===== */
+
+.header .brand-logo {
+    width: 190px !important;
+    height: 70px !important;
+    min-width: 190px !important;
+    max-width: 190px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    overflow: hidden !important;
+    text-decoration: none !important;
+    flex-shrink: 0 !important;
+}
+
+.header .brand-logo img {
+    width: 180px !important;
+    height: 65px !important;
+    max-width: 180px !important;
+    max-height: 65px !important;
+
+    display: block !important;
+    object-fit: contain !important;
+    position: static !important;
+    transform: none !important;
+    margin: 0 !important;
+}
+
+@media (max-width: 650px) {
+
+    .header .brand-logo {
+        width: 135px !important;
+        min-width: 135px !important;
+        height: 58px !important;
+    }
+
+    .header .brand-logo img {
+        width: 130px !important;
+        height: 52px !important;
+    }
 }
