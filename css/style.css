@@ -444,4 +444,38 @@ body {
     .section-title h2 {
         font-size: 25px;
     }
+}/* ===== ALAQTAR LOGO FIX ===== */
+
+.header .logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 220px;
+    min-width: 220px;
+    height: 75px;
+    overflow: hidden;
+}
+
+.header .logo img {
+    display: block !important;
+    width: 200px !important;
+    max-width: 200px !important;
+    height: 70px !important;
+    max-height: 70px !important;
+    object-fit: contain !important;
+}
+
+@media (max-width: 650px) {
+    .header .logo {
+        width: 145px;
+        min-width: 145px;
+        height: 60px;
+    }
+
+    .header .logo img {
+        width: 140px !important;
+        max-width: 140px !important;
+        height: 55px !important;
+        max-height: 55px !important;
+    }
 }
