@@ -248,7 +248,54 @@ def public_services():
                           FROM services WHERE active=1 ORDER BY id DESC""").fetchall()
     con.close()
     return jsonify([dict(r) for r in rows])
+def upload_to_supabase(file, order_no):
+    if not file or not file.filename:
+        return None
 
+    allowed_types = {
+        "image/jpeg",
+        "image/png",
+        "image/webp",
+        "application/pdf",
+    }
+
+    if file.mimetype not in allowed_types:
+        raise ValueError("نوع الملف غير مسموح")
+
+    original_name = file.filename
+    ext = os.path.splitext(original_name)[1].lower()
+
+    safe_name = f"{uuid4().hex}{ext}"
+    storage_path = f"{order_no}/{safe_name}"
+
+    upload_url = (
+        f"{SUPABASE_URL}/storage/v1/object/"
+        f"{SUPABASE_BUCKET}/{storage_path}"
+    )
+
+    headers = {
+        "Authorization": f"Bearer {SUPABASE_SECRET_KEY}",
+        "apikey": SUPABASE_SECRET_KEY,
+        "Content-Type": file.mimetype,
+    }
+
+    response = requests.post(
+        upload_url,
+        headers=headers,
+        data=file.read(),
+        timeout=60,
+    )
+
+    if not response.ok:
+        raise RuntimeError(
+            f"Supabase upload failed: {response.status_code} {response.text}"
+        )
+
+    return {
+        "file_name": original_name,
+        "file_url": storage_path,
+        "file_type": file.mimetype,
+    }
 @app.post("/api/orders")
 def create_order():
     data = request.form
