@@ -1,11 +1,12 @@
 import os
-import sqlite3
+import psycopg2
+from psycopg2.extras import RealDictCursor
 from datetime import datetime
 from functools import wraps
 from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-DB_PATH = os.path.join(BASE_DIR, "alaqtar.db")
+DATABASE_URL = os.environ.get("DATABASE_URL", "")
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", "")
@@ -19,15 +20,14 @@ app.config.update(
 )
 
 def db():
-    con = sqlite3.connect(DB_PATH)
-    con.row_factory = sqlite3.Row
+    con = psycopg2.connect(DATABASE_URL, cursor_factory=RealDictCursor)
     return con
 
 def init_db():
     con = db()
     con.executescript("""
     CREATE TABLE IF NOT EXISTS orders (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      id SERIAL PRIMARY KEY,
       order_no TEXT UNIQUE NOT NULL,
       customer_name TEXT NOT NULL,
       phone TEXT NOT NULL,
@@ -37,7 +37,7 @@ def init_db():
       created_at TEXT NOT NULL
     );
     CREATE TABLE IF NOT EXISTS companies (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      id SERIAL PRIMARY KEY,
       name TEXT NOT NULL,
       phone TEXT DEFAULT '',
       balance REAL NOT NULL DEFAULT 0,
@@ -48,7 +48,7 @@ def init_db():
       created_at TEXT NOT NULL
     );
     CREATE TABLE IF NOT EXISTS services (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      id SERIAL PRIMARY KEY,
       name_ar TEXT NOT NULL,
       name_en TEXT DEFAULT '',
       category TEXT NOT NULL DEFAULT 'general',
@@ -59,7 +59,7 @@ def init_db():
       created_at TEXT NOT NULL
     );
     CREATE TABLE IF NOT EXISTS transactions (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      id SERIAL PRIMARY KEY,
       company_id INTEGER NOT NULL,
       type TEXT NOT NULL,
       amount REAL NOT NULL,
@@ -125,7 +125,7 @@ def order_status(oid):
     allowed = ["جديد","قيد التدقيق","نقص مستمسكات","قيد التنفيذ","مكتمل","مرفوض","ملغي"]
     if status in allowed:
         con = db()
-        con.execute("UPDATE orders SET status=? WHERE id=?", (status, oid))
+        con.execute("UPDATE orders SET status=%s WHERE id=%s", (status, oid))
         con.commit(); con.close()
     return redirect(url_for("orders"))
 
@@ -136,7 +136,7 @@ def companies():
     if request.method == "POST":
         con.execute("""INSERT INTO companies
         (name,phone,balance,credit_limit,markup_type,markup_value,created_at)
-        VALUES(?,?,?,?,?,?,?)""", (
+        VALUES(%s,%s,%s,%s,%s,%s,%s)""", (
             request.form["name"], request.form.get("phone",""),
             float(request.form.get("balance") or 0), float(request.form.get("credit_limit") or 0),
             request.form.get("markup_type","fixed"), float(request.form.get("markup_value") or 0),
@@ -156,9 +156,9 @@ def transaction(cid):
     note = request.form.get("note","")
     sign = 1 if t in ("إيداع","استرجاع") else -1
     con = db()
-    con.execute("INSERT INTO transactions(company_id,type,amount,note,created_at) VALUES(?,?,?,?,?)",
+    con.execute("INSERT INTO transactions(company_id,type,amount,note,created_at) VALUES(%s,%s,%s,%s,%s)",
                 (cid,t,amount,note,datetime.now().isoformat(timespec="seconds")))
-    con.execute("UPDATE companies SET balance=balance+? WHERE id=?", (sign*amount,cid))
+    con.execute("UPDATE companies SET balance=balance+%s WHERE id=%s", (sign*amount,cid))
     con.commit(); con.close()
     return redirect(url_for("companies"))
 
@@ -170,7 +170,7 @@ def services():
     if request.method == "POST":
         con.execute("""INSERT INTO services
         (name_ar,name_en,category,active,base_price,currency,requirements,created_at)
-        VALUES(?,?,?,?,?,?,?,?)""", (
+        VALUES(%s,%s,%s,%s,%s,%s,%s,%s)""", (
             request.form["name_ar"], request.form.get("name_en",""),
             request.form.get("category","general"), 1,
             float(request.form.get("base_price") or 0),
@@ -188,7 +188,7 @@ def services():
 @login_required
 def toggle_service(sid):
     con = db()
-    con.execute("UPDATE services SET active=CASE active WHEN 1 THEN 0 ELSE 1 END WHERE id=?", (sid,))
+    con.execute("UPDATE services SET active=CASE active WHEN 1 THEN 0 ELSE 1 END WHERE id=%s", (sid,))
     con.commit(); con.close()
     return redirect(url_for("services"))
 
@@ -211,7 +211,7 @@ def create_order():
     order_no = "AQT-" + datetime.now().strftime("%Y%m%d%H%M%S%f")[:-3]
     con = db()
     con.execute("""INSERT INTO orders(order_no,customer_name,phone,service,status,notes,created_at)
-                   VALUES(?,?,?,?,?,?,?)""",
+                   VALUES(%s,%s,%s,%s,%s,%s,%s)""",
                 (order_no,name,phone,service,"جديد",data.get("notes",""),datetime.now().isoformat(timespec="seconds")))
     con.commit(); con.close()
     return jsonify({"ok":True,"order_no":order_no}), 201
