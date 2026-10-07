@@ -25,7 +25,8 @@ def db():
 
 def init_db():
     con = db()
-    con.execute("""
+    cur = con.cursor()
+    cur.execute("""
     CREATE TABLE IF NOT EXISTS orders (
       id SERIAL PRIMARY KEY,
       order_no TEXT UNIQUE NOT NULL,
@@ -69,6 +70,7 @@ def init_db():
     );
     """)
     con.commit()
+    cur.close()
     con.close()
 
 def login_required(fn):
