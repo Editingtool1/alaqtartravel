@@ -170,6 +170,8 @@ def companies():
         ))
         con.commit()
         flash("تم إنشاء حساب الشركة")
+        con.close()
+        return redirect(url_for("companies"))
     rows = con.execute("SELECT * FROM companies ORDER BY id DESC").fetchall()
     con.close()
     return render_template("companies.html", rows=rows)
