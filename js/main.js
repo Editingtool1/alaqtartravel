@@ -7,7 +7,55 @@ document.addEventListener('DOMContentLoaded',()=>{
  const show=m=>{toast.textContent=m;toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),2800)};
  const openWA=service=>window.open(`https://wa.me/${wa}?text=${encodeURIComponent('مرحباً، أرغب بطلب: '+service)}`,'_blank','noopener');
  $$('.order-btn,.visa-order').forEach(b=>b.onclick=()=>{const s=b.dataset.service||'خدمة';$('#serviceSelect').value=s.includes('تأشيرة')?'تأشيرة':s.includes('رخص')?'رخصة قيادة دولية':s.includes('عرض')?'عرض سياحي':'خدمة أخرى';$('#request').scrollIntoView({behavior:'smooth'});$('#notes').value=s});
- $('#requestForm').onsubmit=e=>{e.preventDefault();const name=$('#customerName').value.trim(),phone=$('#customerPhone').value.trim(),service=$('#serviceSelect').value,notes=$('#notes').value.trim(),files=$('#documents').files.length;const id='AQ-'+Date.now().toString().slice(-8);const msg=`مرحباً، أرغب بتقديم طلب لدى الأقطار للسفر والسياحة.\nرقم الطلب المبدئي: ${id}\nالاسم: ${name}\nالهاتف: ${phone}\nالخدمة: ${service}\nعدد الملفات المختارة: ${files}\nملاحظات: ${notes||'-'}\n\nملاحظة: الملفات لم تُرفع للموقع بعد، وسأرسل المستمسكات المطلوبة حسب تعليماتكم.`;window.open(`https://wa.me/${wa}?text=${encodeURIComponent(msg)}`,'_blank','noopener')};
+ $('#requestForm').onsubmit=async e=>{
+  e.preventDefault();
+  const name=$('#customerName').value.trim();
+  const phone=$('#customerPhone').value.trim();
+  const service=$('#serviceSelect').value;
+  const notes=$('#notes').value.trim();
+  const files=$('#documents').files.length;
+  const btn=e.currentTarget.querySelector('button[type="submit"]');
+
+  if(!name||!phone||!service){
+   show('يرجى إكمال الاسم ورقم الهاتف والخدمة.');
+   return;
+  }
+
+  btn.disabled=true;
+  const oldText=btn.textContent;
+  btn.textContent='جارٍ إرسال الطلب...';
+
+  try{
+   const response=await fetch('https://alaqtartravel-production.up.railway.app/api/orders',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({
+     customer_name:name,
+     phone:phone,
+     service:service,
+     notes:notes
+    })
+   });
+
+   const data=await response.json();
+
+   if(!response.ok||!data.ok){
+    throw new Error(data.error||'Request failed');
+   }
+
+   const msg=`مرحباً، تم تقديم طلب لدى الأقطار للسفر والسياحة.\nرقم الطلب: ${data.order_no}\nالاسم: ${name}\nالهاتف: ${phone}\nالخدمة: ${service}\nعدد الملفات المختارة: ${files}\nملاحظات: ${notes||'-'}\n\nملاحظة: المستمسكات المختارة لم تُرفع بعد، وسيتم إرسالها حسب تعليمات الشركة.`;
+
+   show(`تم تسجيل الطلب بنجاح: ${data.order_no}`);
+   window.open(`https://wa.me/${wa}?text=${encodeURIComponent(msg)}`,'_blank','noopener');
+   e.currentTarget.reset();
+  }catch(err){
+   console.error(err);
+   show('تعذر إرسال الطلب. يرجى المحاولة مرة أخرى.');
+  }finally{
+   btn.disabled=false;
+   btn.textContent=oldText;
+  }
+ };
  $('#flightSearchBtn').onclick=()=>show('البحث المباشر سيتفعّل بعد ربط مزود حجز الطيران API.');
  let usd=false;$('#currencyBtn').onclick=()=>{usd=!usd;$('#currencyBtn').textContent=usd?'IQD':'USD';$$('[data-iqd]').forEach(el=>{const n=Number(el.dataset.iqd);el.textContent=usd?`$${(n/1310).toFixed(0)}*`:`${n.toLocaleString('en-US')} د.ع`});if(usd)show('تحويل USD تقديري للعرض فقط؛ السعر النهائي سيُربط بسعر الصرف من الإدارة.')};
  const ar={navHome:'الرئيسية',navServices:'الخدمات',navVisas:'التأشيرات',navIdp:'الرخص الدولية',navOffers:'العروض',navContact:'اتصل بنا',companyLogin:'دخول الشركات'};
