@@ -1,0 +1,3 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{{ title or "ALAQTAR Admin" }}</title><link rel="stylesheet" href="{{ url_for('static',filename='admin.css') }}"></head><body>
+<header><b>الأقطار للسفر والسياحة</b>{% if session.get('admin') %}<nav><a href="/admin">الرئيسية</a><a href="/admin/orders">الطلبات</a><a href="/admin/services">الخدمات</a><a href="/admin/companies">الشركات</a><a href="/logout">خروج</a></nav>{% endif %}</header>
+<main>{% with msgs=get_flashed_messages() %}{% for m in msgs %}<div class="flash">{{m}}</div>{% endfor %}{% endwith %}{% block body %}{% endblock %}</main></body></html>

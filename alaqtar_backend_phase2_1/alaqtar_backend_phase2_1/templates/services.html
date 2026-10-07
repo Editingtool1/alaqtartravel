@@ -1,0 +1,14 @@
+{% extends "base.html" %}{% block body %}
+<h1>إدارة الخدمات والتأشيرات</h1>
+<div class="card"><h2>إضافة خدمة</h2>
+<form method="post" class="grid">
+<input name="name_ar" placeholder="الاسم بالعربية" required>
+<input name="name_en" placeholder="English name">
+<select name="category"><option value="visa">تأشيرة</option><option value="idp">رخصة دولية</option><option value="flight">طيران</option><option value="hotel">فنادق</option><option value="tour">عرض سياحي</option><option value="general">أخرى</option></select>
+<input name="base_price" type="number" step=".01" min="0" placeholder="السعر الأساسي">
+<select name="currency"><option>IQD</option><option>USD</option></select>
+<input name="requirements" placeholder="المتطلبات - مثال: جواز، صورة شخصية">
+<button>إضافة</button></form></div>
+<div class="card"><table><tr><th>الخدمة</th><th>النوع</th><th>السعر</th><th>الحالة</th><th></th></tr>
+{% for s in rows %}<tr><td>{{s.name_ar}}<br><small>{{s.name_en}}</small></td><td>{{s.category}}</td><td>{{s.base_price}} {{s.currency}}</td><td>{% if s.active %}ظاهرة{% else %}مخفية{% endif %}</td><td><form method="post" action="/admin/services/{{s.id}}/toggle"><button>{% if s.active %}إخفاء{% else %}إظهار{% endif %}</button></form></td></tr>{% else %}<tr><td colspan="5">لا توجد خدمات بعد</td></tr>{% endfor %}
+</table></div>{% endblock %}
