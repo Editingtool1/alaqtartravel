@@ -98,6 +98,15 @@ def init_db():
       created_at TEXT NOT NULL,
       FOREIGN KEY(company_id) REFERENCES companies(id)
     );
+    CREATE TABLE IF NOT EXISTS order_files (
+    id SERIAL PRIMARY KEY,
+    order_no TEXT NOT NULL,
+    file_name TEXT NOT NULL,
+    file_url TEXT NOT NULL,
+    file_type TEXT DEFAULT '',
+    created_at TEXT NOT NULL,
+    FOREIGN KEY(order_no) REFERENCES orders(order_no)
+);
     """)
     con.commit()
     cur.close()
