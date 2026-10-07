@@ -3,240 +3,203 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <meta name="description" content="الأقطار للسفر والسياحة - خدمات السفر، الطيران، الفنادق، التأشيرات ورخصة القيادة الدولية.">
     <title>الأقطار للسفر والسياحة | ALAQTAR Travel & Tourism</title>
-
     <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
 
-    <header class="header">
-        <div class="container">
+<header class="header">
+    <div class="container header-inner">
+        <a href="#home" class="brand-logo" aria-label="الأقطار للسفر والسياحة">
+            <img src="images/logo.png" alt="ALAQTAR Travel & Tourism">
+        </a>
 
-          <a href="index.html" class="brand-logo">
-    <img src="images/logo.png" alt="ALAQTAR Travel & Tourism">
-</a>
+        <button class="menu-toggle" type="button" aria-label="فتح القائمة" aria-expanded="false">☰</button>
 
-            <nav class="nav">
-                <a href="#" class="active">الرئيسية</a>
-                <a href="#">الرحلات</a>
-                <a href="#">الفنادق</a>
-                <a href="#">التأشيرات</a>
-                <a href="#">العروض</a>
-                <a href="#">من نحن</a>
-                <a href="#">اتصل بنا</a>
-            </nav>
+        <nav class="nav" id="main-nav">
+            <a href="#home" class="active">الرئيسية</a>
+            <a href="#booking">الرحلات</a>
+            <a href="#services">الفنادق</a>
+            <a href="#services">التأشيرات</a>
+            <a href="#offers">العروض</a>
+            <a href="#about">من نحن</a>
+            <a href="#contact">اتصل بنا</a>
+        </nav>
 
-            <button class="login-btn">
-                تسجيل الدخول
-            </button>
+        <a href="#contact" class="login-btn">تسجيل الدخول</a>
+    </div>
+</header>
 
+<main>
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <span class="hero-small">سافر معنا إلى العالم</span>
+            <h1>رحلتك تبدأ مع <strong>الأقطار</strong></h1>
+            <p>ابحث عن رحلتك واحجز تذكرتك بسهولة</p>
         </div>
-    </header>
 
-
-    <main>
-
-        <section class="hero">
-
-            <div class="hero-content">
-
-                <span class="hero-small">
-                    سافر معنا إلى العالم
-                </span>
-
-                <h2>
-                    رحلتك تبدأ مع
-                    <strong>الأقطار</strong>
-                </h2>
-
-                <p>
-                    ابحث عن رحلتك واحجز تذكرتك بسهولة
-                </p>
-
+        <div class="booking-box" id="booking">
+            <div class="trip-types">
+                <label><input type="radio" name="trip" value="round" checked> ذهاب وعودة</label>
+                <label><input type="radio" name="trip" value="oneway"> ذهاب فقط</label>
             </div>
 
-
-            <div class="booking-box">
-
-                <div class="trip-types">
-
-                    <label>
-                        <input type="radio" name="trip" checked>
-                        ذهاب وعودة
-                    </label>
-
-                    <label>
-                        <input type="radio" name="trip">
-                        ذهاب فقط
-                    </label>
-
+            <div class="search-grid">
+                <div class="field">
+                    <label for="from">من</label>
+                    <input id="from" type="text" placeholder="مدينة المغادرة">
                 </div>
-
-
-                <div class="search-grid">
-
-                    <div class="field">
-                        <label>من</label>
-                        <input type="text" placeholder="مدينة المغادرة">
-                    </div>
-
-                    <div class="field">
-                        <label>إلى</label>
-                        <input type="text" placeholder="مدينة الوصول">
-                    </div>
-
-                    <div class="field">
-                        <label>تاريخ المغادرة</label>
-                        <input type="date">
-                    </div>
-
-                    <div class="field">
-                        <label>تاريخ العودة</label>
-                        <input type="date">
-                    </div>
-
-                    <div class="field">
-                        <label>المسافرون</label>
-
-                        <select>
-                            <option>1 مسافر</option>
-                            <option>2 مسافرين</option>
-                            <option>3 مسافرين</option>
-                            <option>4 مسافرين</option>
-                        </select>
-                    </div>
-
-                    <div class="field">
-                        <label>درجة السفر</label>
-
-                        <select>
-                            <option>السياحية</option>
-                            <option>رجال الأعمال</option>
-                            <option>الدرجة الأولى</option>
-                        </select>
-                    </div>
-
+                <div class="field">
+                    <label for="to">إلى</label>
+                    <input id="to" type="text" placeholder="مدينة الوصول">
                 </div>
-
-                <button class="search-btn">
-                    بحث عن الرحلات
-                </button>
-
+                <div class="field">
+                    <label for="depart">تاريخ المغادرة</label>
+                    <input id="depart" type="date">
+                </div>
+                <div class="field return-field">
+                    <label for="return">تاريخ العودة</label>
+                    <input id="return" type="date">
+                </div>
+                <div class="field">
+                    <label for="passengers">المسافرون</label>
+                    <select id="passengers">
+                        <option>1 مسافر</option><option>2 مسافرين</option>
+                        <option>3 مسافرين</option><option>4 مسافرين</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label for="class">درجة السفر</label>
+                    <select id="class">
+                        <option>السياحية</option><option>رجال الأعمال</option><option>الدرجة الأولى</option>
+                    </select>
+                </div>
             </div>
 
-        </section>
+            <button class="search-btn" type="button">بحث عن الرحلات</button>
+        </div>
+    </section>
 
+    <section class="services" id="services">
+        <div class="section-title">
+            <span>خدمات الأقطار</span>
+            <h2>كل ما تحتاجه لرحلتك</h2>
+            <p>خدمات سفر وسياحة متكاملة في مكان واحد</p>
+        </div>
 
-     <section class="services">
+        <div class="services-grid">
+            <a href="#contact" class="service-card">
+                <div class="service-icon">✈</div>
+                <h3>حجز تذاكر الطيران</h3>
+                <p>احجز رحلاتك إلى مختلف الوجهات مع خيارات متعددة ومتابعة مستمرة.</p>
+                <span class="service-link">استكشف الخدمة ←</span>
+            </a>
+            <a href="#contact" class="service-card">
+                <div class="service-icon">🏨</div>
+                <h3>حجز الفنادق</h3>
+                <p>خيارات متنوعة من الفنادق والإقامات في أهم الوجهات حول العالم.</p>
+                <span class="service-link">استكشف الخدمة ←</span>
+            </a>
+            <a href="#contact" class="service-card">
+                <div class="service-icon">🛂</div>
+                <h3>التأشيرات</h3>
+                <p>خدمات تقديم ومتابعة معاملات التأشيرات لمجموعة من الوجهات.</p>
+                <span class="service-link">استكشف الخدمة ←</span>
+            </a>
+            <a href="#contact" class="service-card">
+                <div class="service-icon">🚗</div>
+                <h3>رخصة القيادة الدولية</h3>
+                <p>خدمة إصدار رخصة القيادة الدولية بإجراءات سهلة وسريعة.</p>
+                <span class="service-link">استكشف الخدمة ←</span>
+            </a>
+        </div>
+    </section>
 
-    <div class="section-title">
-        <span>خدمات الأقطار</span>
-        <h2>كل ما تحتاجه لرحلتك</h2>
-        <p>خدمات سفر وسياحة متكاملة في مكان واحد</p>
+    <section class="offers" id="offers">
+        <div class="section-title">
+            <span>عروض الأقطار</span>
+            <h2>اكتشف أحدث عروض السفر</h2>
+            <p>اختر وجهتك واستمتع بعروض مميزة لرحلتك القادمة</p>
+        </div>
+
+        <div class="offers-grid">
+            <a href="#contact" class="offer-card">
+                <div class="offer-image">
+                    <img src="images/istanbul.jpg" alt="إسطنبول" loading="lazy">
+                    <span class="offer-badge">عرض مميز</span>
+                </div>
+                <div class="offer-content">
+                    <span class="offer-country">تركيا</span>
+                    <h3>إسطنبول</h3>
+                    <p>اكتشف إسطنبول مع خيارات مميزة للفنادق والرحلات السياحية.</p>
+                    <span class="offer-link">عرض التفاصيل ←</span>
+                </div>
+            </a>
+
+            <a href="#contact" class="offer-card">
+                <div class="offer-image">
+                    <img src="images/mashhad.jpg" alt="مشهد" loading="lazy">
+                    <span class="offer-badge">الأكثر طلباً</span>
+                </div>
+                <div class="offer-content">
+                    <span class="offer-country">إيران</span>
+                    <h3>مشهد</h3>
+                    <p>رحلات وحجوزات فندقية وخدمات متكاملة لزيارة مدينة مشهد.</p>
+                    <span class="offer-link">عرض التفاصيل ←</span>
+                </div>
+            </a>
+
+            <a href="#contact" class="offer-card">
+                <div class="offer-image">
+                    <img src="images/dubai.jpg" alt="دبي" loading="lazy">
+                    <span class="offer-badge">وجهة مميزة</span>
+                </div>
+                <div class="offer-content">
+                    <span class="offer-country">الإمارات</span>
+                    <h3>دبي</h3>
+                    <p>استمتع بدبي مع خيارات الفنادق والتأشيرات والخدمات السياحية.</p>
+                    <span class="offer-link">عرض التفاصيل ←</span>
+                </div>
+            </a>
+        </div>
+
+        <div class="offers-more"><a href="#contact" class="primary-btn">عرض جميع العروض</a></div>
+    </section>
+
+    <section class="why-us" id="about">
+        <div class="section-title">
+            <span>لماذا الأقطار؟</span>
+            <h2>رحلتك معنا أسهل</h2>
+            <p>نهتم بتفاصيل رحلتك من بداية التخطيط وحتى الوصول</p>
+        </div>
+        <div class="features-grid">
+            <article class="feature"><div>✓</div><h3>خدمات متكاملة</h3><p>الطيران والفنادق والتأشيرات وخدمات السفر في مكان واحد.</p></article>
+            <article class="feature"><div>◎</div><h3>متابعة مستمرة</h3><p>متابعة طلباتك ومساعدتك في اختيار الخدمة المناسبة لرحلتك.</p></article>
+            <article class="feature"><div>★</div><h3>خيارات متنوعة</h3><p>حلول وخيارات متعددة تناسب مختلف الوجهات واحتياجات المسافرين.</p></article>
+            <article class="feature"><div>☎</div><h3>خدمة العملاء</h3><p>فريق جاهز لاستقبال استفساراتك ومساعدتك في خدمات السفر.</p></article>
+        </div>
+    </section>
+
+    <section class="cta" id="contact">
+        <div class="cta-inner">
+            <div>
+                <span>الأقطار للسفر والسياحة</span>
+                <h2>جاهز لرحلتك القادمة؟</h2>
+                <p>تواصل معنا للاستفسار عن الرحلات والفنادق والتأشيرات وبقية خدمات السفر.</p>
+            </div>
+            <a class="cta-btn" href="tel:+9647809000849">اتصل بنا</a>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="container footer-inner">
+        <img src="images/logo.png" alt="ALAQTAR Travel & Tourism">
+        <p>© <span id="year"></span> الأقطار للسفر والسياحة. جميع الحقوق محفوظة.</p>
     </div>
+</footer>
 
-    <div class="services-grid">
-
-        <a href="#" class="service-card">
-            <div class="service-icon">✈</div>
-            <h3>حجز تذاكر الطيران</h3>
-            <p>احجز رحلاتك إلى مختلف الوجهات مع خيارات متعددة ومتابعة مستمرة.</p>
-            <span class="service-link">استكشف الخدمة ←</span>
-        </a>
-
-        <a href="#" class="service-card">
-            <div class="service-icon">🏨</div>
-            <h3>حجز الفنادق</h3>
-            <p>خيارات متنوعة من الفنادق والإقامات في أهم الوجهات حول العالم.</p>
-            <span class="service-link">استكشف الخدمة ←</span>
-        </a>
-
-        <a href="#" class="service-card">
-            <div class="service-icon">🛂</div>
-            <h3>التأشيرات</h3>
-            <p>خدمات تقديم ومتابعة معاملات التأشيرات لمجموعة من الوجهات.</p>
-            <span class="service-link">استكشف الخدمة ←</span>
-        </a>
-
-        <a href="#" class="service-card">
-            <div class="service-icon">🚗</div>
-            <h3>رخصة القيادة الدولية</h3>
-            <p>خدمة إصدار رخصة القيادة الدولية بإجراءات سهلة وسريعة.</p>
-            <span class="service-link">استكشف الخدمة ←</span>
-        </a>
-
-    </div>
-
-</section>   
-<!-- ==============================
-     LATEST OFFERS
-================================ -->
-
-<section class="offers">
-
-    <div class="section-title">
-        <span>عروض الأقطار</span>
-        <h2>اكتشف أحدث عروض السفر</h2>
-        <p>اختر وجهتك واستمتع بعروض مميزة لرحلتك القادمة</p>
-    </div>
-
-    <div class="offers-grid">
-
-        <a href="#" class="offer-card">
-            <div class="offer-image">
-                <img src="images/istanbul.jpg" alt="عروض إسطنبول">
-                <span class="offer-badge">عرض مميز</span>
-            </div>
-
-            <div class="offer-content">
-                <span class="offer-country">تركيا</span>
-                <h3>إسطنبول</h3>
-                <p>اكتشف إسطنبول مع خيارات مميزة للفنادق والرحلات السياحية.</p>
-                <span class="offer-link">عرض التفاصيل ←</span>
-            </div>
-        </a>
-
-        <a href="#" class="offer-card">
-            <div class="offer-image">
-                <img src="images/mashhad.jpg" alt="عروض مشهد">
-                <span class="offer-badge">الأكثر طلباً</span>
-            </div>
-
-            <div class="offer-content">
-                <span class="offer-country">إيران</span>
-                <h3>مشهد</h3>
-                <p>رحلات وحجوزات فندقية وخدمات متكاملة لزيارة مدينة مشهد.</p>
-                <span class="offer-link">عرض التفاصيل ←</span>
-            </div>
-        </a>
-
-        <a href="#" class="offer-card">
-            <div class="offer-image">
-                <img src="images/dubai.jpg" alt="عروض دبي">
-                <span class="offer-badge">وجهة مميزة</span>
-            </div>
-
-            <div class="offer-content">
-                <span class="offer-country">الإمارات</span>
-                <h3>دبي</h3>
-                <p>استمتع بدبي مع خيارات الفنادق والتأشيرات والخدمات السياحية.</p>
-                <span class="offer-link">عرض التفاصيل ←</span>
-            </div>
-        </a>
-
-    </div>
-
-    <div class="offers-more">
-        <a href="#" class="offers-btn">عرض جميع العروض</a>
-    </div>
-
-</section>
-    </main>
-
-
-    <script src="js/main.js"></script>
-
+<script src="js/main.js"></script>
 </body>
 </html>
