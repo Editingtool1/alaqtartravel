@@ -1,5 +1,7 @@
 import os
 import psycopg2
+import requests
+from uuid import uuid4
 from psycopg2.extras import RealDictCursor
 from datetime import datetime
 from functools import wraps
@@ -8,8 +10,12 @@ from flask_cors import CORS
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATABASE_URL = os.environ.get("DATABASE_URL", "")
+SUPABASE_URL = os.environ.get("SUPABASE_URL", "")
+SUPABASE_SECRET_KEY = os.environ.get("SUPABASE_SECRET_KEY", "")
+SUPABASE_BUCKET = os.environ.get("SUPABASE_BUCKET", "order-documents")
 
 app = Flask(__name__)
+app.config["MAX_CONTENT_LENGTH"] = 10 * 1024 * 1024
 CORS(app, resources={
     r"/api/*": {
         "origins": "https://editingtool1.github.io"
@@ -245,19 +251,87 @@ def public_services():
 
 @app.post("/api/orders")
 def create_order():
-    data = request.get_json(silent=True) or request.form
+    data = request.form
+
     name = (data.get("customer_name") or "").strip()
     phone = (data.get("phone") or "").strip()
     service = (data.get("service") or "").strip()
+    notes = (data.get("notes") or "").strip()
+
     if not name or not phone or not service:
-        return jsonify({"ok":False,"error":"customer_name, phone and service are required"}), 400
+        return jsonify({
+            "ok": False,
+            "error": "customer_name, phone and service are required"
+        }), 400
+
+    files = request.files.getlist("documents")
+
     order_no = "AQT-" + datetime.now().strftime("%Y%m%d%H%M%S%f")[:-3]
+    created_at = datetime.now().isoformat(timespec="seconds")
+
     con = db()
-    con.execute("""INSERT INTO orders(order_no,customer_name,phone,service,status,notes,created_at)
-                   VALUES(%s,%s,%s,%s,%s,%s,%s)""",
-                (order_no,name,phone,service,"جديد",data.get("notes",""),datetime.now().isoformat(timespec="seconds")))
-    con.commit(); con.close()
-    return jsonify({"ok":True,"order_no":order_no}), 201
+
+    try:
+        # إنشاء الطلب
+        con.execute(
+            """INSERT INTO orders
+            (order_no, customer_name, phone, service, status, notes, created_at)
+            VALUES (%s,%s,%s,%s,%s,%s,%s)""",
+            (
+                order_no,
+                name,
+                phone,
+                service,
+                "جديد",
+                notes,
+                created_at
+            )
+        )
+
+        # رفع المستمسكات وتسجيلها
+        uploaded_files = []
+
+        for file in files:
+            if not file or not file.filename:
+                continue
+
+            uploaded = upload_to_supabase(file, order_no)
+
+            if uploaded:
+                con.execute(
+                    """INSERT INTO order_files
+                    (order_no, file_name, file_url, file_type, created_at)
+                    VALUES (%s,%s,%s,%s,%s)""",
+                    (
+                        order_no,
+                        uploaded["file_name"],
+                        uploaded["file_url"],
+                        uploaded["file_type"],
+                        created_at
+                    )
+                )
+
+                uploaded_files.append(uploaded)
+
+        con.commit()
+
+        return jsonify({
+            "ok": True,
+            "order_no": order_no,
+            "files_count": len(uploaded_files)
+        }), 201
+
+    except Exception as e:
+        con.rollback()
+        print("CREATE ORDER ERROR:", e)
+
+        return jsonify({
+            "ok": False,
+            "error": "تعذر تسجيل الطلب أو رفع المستمسكات"
+        }), 500
+
+    finally:
+        con.close()
 
 @app.get("/health")
 def health():

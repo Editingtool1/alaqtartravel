@@ -26,16 +26,26 @@ const initALAQTAR = () => {
   btn.textContent='جارٍ إرسال الطلب...';
 
   try{
-   const response=await fetch('https://alaqtartravel-production.up.railway.app/api/orders',{
-    method:'POST',
-    headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({
-     customer_name:name,
-     phone:phone,
-     service:service,
-     notes:notes
-    })
-   });
+ const formData = new FormData();
+
+formData.append('customer_name', name);
+formData.append('phone', phone);
+formData.append('service', service);
+formData.append('notes', notes);
+
+const selectedFiles = $('#documents').files;
+
+for (const file of selectedFiles) {
+  formData.append('documents', file);
+}
+
+const response = await fetch(
+  'https://alaqtartravel-production.up.railway.app/api/orders',
+  {
+    method: 'POST',
+    body: formData
+  }
+);  
 
    const data=await response.json();
 
