@@ -161,10 +161,101 @@ def dashboard():
 @login_required
 def orders():
     con = db()
-    rows = con.execute("SELECT * FROM orders ORDER BY id DESC").fetchall()
+    rows = con.execute("""
+    SELECT o.*,
+           COUNT(f.id) AS files_count
+    FROM orders o
+    LEFT JOIN order_files f ON f.order_no = o.order_no
+    GROUP BY o.id
+    ORDER BY o.id DESC
+""").fetchall() 
     con.close()
     return render_template("orders.html", rows=rows)
+@app.get("/admin/orders/<order_no>/files")
+@login_required
+def order_files(order_no):
+    con = db()
 
+    order = con.execute(
+        "SELECT * FROM orders WHERE order_no=%s",
+        (order_no,)
+    ).fetchone()
+
+    files = con.execute(
+        """SELECT * FROM order_files
+        WHERE order_no=%s
+        ORDER BY id DESC""",
+        (order_no,)
+    ).fetchall()
+
+    con.close()
+
+    if not order:
+        return "الطلب غير موجود", 404
+
+    return render_template(
+        "order_files.html",
+        order=order,
+        files=files
+    )@app.get("/admin/files/<int:file_id>")
+@login_required
+def admin_file(file_id):
+    con = db()
+
+    file_row = con.execute(
+        "SELECT * FROM order_files WHERE id=%s",
+        (file_id,)
+    ).fetchone()
+
+    con.close()
+
+    if not file_row:
+        return "الملف غير موجود", 404
+
+    storage_path = file_row["file_url"]
+
+    sign_url = (
+        f"{SUPABASE_URL}/storage/v1/object/sign/"
+        f"{SUPABASE_BUCKET}/{storage_path}"
+    )
+
+    headers = {
+        "Authorization": f"Bearer {SUPABASE_SECRET_KEY}",
+        "apikey": SUPABASE_SECRET_KEY,
+        "Content-Type": "application/json",
+    }
+
+    response = requests.post(
+        sign_url,
+        headers=headers,
+        json={"expiresIn": 300},
+        timeout=30,
+    )
+
+    if not response.ok:
+        print(
+            "SUPABASE SIGN ERROR:",
+            response.status_code,
+            response.text
+        )
+        return "تعذر فتح المستمسك", 500
+
+    data = response.json()
+
+    signed_path = (
+        data.get("signedURL")
+        or data.get("signedUrl")
+    )
+
+    if not signed_path:
+        return "تعذر إنشاء رابط المستمسك", 500
+
+    if signed_path.startswith("http"):
+        signed_url = signed_path
+    else:
+        signed_url = f"{SUPABASE_URL}{signed_path}"
+
+    return redirect(signed_url)
 @app.post("/admin/orders/<int:oid>/status")
 @login_required
 def order_status(oid):

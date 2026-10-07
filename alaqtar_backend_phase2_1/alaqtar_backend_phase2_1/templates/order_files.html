@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<h1>مستمسكات الطلب</h1>
+
+<div class="card">
+
+  <p>
+    <strong>رقم الطلب:</strong>
+    {{ order.order_no }}
+  </p>
+
+  <p>
+    <strong>اسم العميل:</strong>
+    {{ order.customer_name }}
+  </p>
+
+  <p>
+    <strong>الخدمة:</strong>
+    {{ order.service }}
+  </p>
+
+  <hr>
+
+  {% if files %}
+
+    <table>
+      <tr>
+        <th>اسم الملف</th>
+        <th>نوع الملف</th>
+        <th>عرض</th>
+      </tr>
+
+      {% for f in files %}
+      <tr>
+        <td>{{ f.file_name }}</td>
+        <td>{{ f.file_type }}</td>
+        <td>
+          <a href="/admin/files/{{ f.id }}" target="_blank">
+            عرض المستمسك
+          </a>
+        </td>
+      </tr>
+      {% endfor %}
+
+    </table>
+
+  {% else %}
+
+    <p>لا توجد مستمسكات مرفوعة لهذا الطلب.</p>
+
+  {% endif %}
+
+  <br>
+
+  <a href="/admin/orders">
+    ← العودة إلى الطلبات
+  </a>
+
+</div>
+
+{% endblock %}

@@ -1,1 +1,60 @@
-{% extends "base.html" %}{% block body %}<h1>إدارة الطلبات</h1><div class="card"><table><tr><th>رقم الطلب</th><th>العميل</th><th>الهاتف</th><th>الخدمة</th><th>الحالة</th><th>تحديث</th></tr>{% for r in rows %}<tr><td>{{r.order_no}}</td><td>{{r.customer_name}}</td><td>{{r.phone}}</td><td>{{r.service}}</td><td>{{r.status}}</td><td><form method="post" action="/admin/orders/{{r.id}}/status" class="inline"><select name="status">{% for s in ["جديد","قيد التدقيق","نقص مستمسكات","قيد التنفيذ","مكتمل","مرفوض","ملغي"] %}<option {% if s==r.status %}selected{% endif %}>{{s}}</option>{% endfor %}</select><button>حفظ</button></form></td></tr>{% endfor %}</table></div>{% endblock %}
+{% extends "base.html" %}
+
+{% block body %}
+
+<h1>إدارة الطلبات</h1>
+
+<div class="card">
+  <table>
+    <tr>
+      <th>رقم الطلب</th>
+      <th>العميل</th>
+      <th>الهاتف</th>
+      <th>الخدمة</th>
+      <th>المستمسكات</th>
+      <th>الحالة</th>
+      <th>تحديث</th>
+    </tr>
+
+    {% for r in rows %}
+    <tr>
+      <td>{{ r.order_no }}</td>
+      <td>{{ r.customer_name }}</td>
+      <td>{{ r.phone }}</td>
+      <td>{{ r.service }}</td>
+
+      <td>
+  {% if r.files_count > 0 %}
+    <a href="/admin/orders/{{ r.order_no }}/files">
+      عرض المستمسكات ({{ r.files_count }})
+    </a>
+  {% else %}
+    لا يوجد
+  {% endif %}
+</td>
+
+      <td>{{ r.status }}</td>
+
+      <td>
+        <form method="post"
+              action="/admin/orders/{{ r.id }}/status"
+              class="inline">
+
+          <select name="status">
+            {% for s in ["جديد","قيد التدقيق","نقص مستمسكات","قيد التنفيذ","مكتمل","مرفوض","ملغي"] %}
+              <option {% if s == r.status %}selected{% endif %}>
+                {{ s }}
+              </option>
+            {% endfor %}
+          </select>
+
+          <button>حفظ</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+
+  </table>
+</div>
+
+{% endblock %}
