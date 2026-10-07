@@ -1,205 +1,66 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="الأقطار للسفر والسياحة - خدمات السفر، الطيران، الفنادق، التأشيرات ورخصة القيادة الدولية.">
-    <title>الأقطار للسفر والسياحة | ALAQTAR Travel & Tourism</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="الأقطار للسفر والسياحة - حجوزات، تأشيرات، رخص قيادة دولية وعروض سياحية">
+  <title>الأقطار للسفر والسياحة | ALAQTAR Travel & Tourism</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
 <header class="header">
-    <div class="container header-inner">
-        <a href="#home" class="brand-logo" aria-label="الأقطار للسفر والسياحة">
-            <img src="images/logo.png" alt="ALAQTAR Travel & Tourism">
-        </a>
-
-        <button class="menu-toggle" type="button" aria-label="فتح القائمة" aria-expanded="false">☰</button>
-
-        <nav class="nav" id="main-nav">
-            <a href="#home" class="active">الرئيسية</a>
-            <a href="#booking">الرحلات</a>
-            <a href="#services">الفنادق</a>
-            <a href="#services">التأشيرات</a>
-            <a href="#offers">العروض</a>
-            <a href="#about">من نحن</a>
-            <a href="#contact">اتصل بنا</a>
-        </nav>
-
-        <a href="#contact" class="login-btn">تسجيل الدخول</a>
-    </div>
+  <div class="container header-inner">
+    <a href="#home" class="brand-logo"><img src="images/logo.png" alt="ALAQTAR Travel & Tourism"></a>
+    <button class="menu-toggle" aria-label="القائمة" aria-expanded="false">☰</button>
+    <nav class="nav" id="main-nav">
+      <a href="#home" data-i18n="navHome">الرئيسية</a><a href="#services" data-i18n="navServices">الخدمات</a><a href="#visas" data-i18n="navVisas">التأشيرات</a><a href="#idp" data-i18n="navIdp">الرخص الدولية</a><a href="#offers" data-i18n="navOffers">العروض</a><a href="#contact" data-i18n="navContact">اتصل بنا</a>
+    </nav>
+    <div class="header-actions"><button class="mini-btn" id="langBtn">EN</button><button class="mini-btn" id="currencyBtn">USD</button><a href="#companies" class="login-btn" data-i18n="companyLogin">دخول الشركات</a></div>
+  </div>
 </header>
-
 <main>
-    <section class="hero" id="home">
-        <div class="hero-content">
-            <span class="hero-small">سافر معنا إلى العالم</span>
-            <h1>رحلتك تبدأ مع <strong>الأقطار</strong></h1>
-            <p>ابحث عن رحلتك واحجز تذكرتك بسهولة</p>
-        </div>
-
-        <div class="booking-box" id="booking">
-            <div class="trip-types">
-                <label><input type="radio" name="trip" value="round" checked> ذهاب وعودة</label>
-                <label><input type="radio" name="trip" value="oneway"> ذهاب فقط</label>
-            </div>
-
-            <div class="search-grid">
-                <div class="field">
-                    <label for="from">من</label>
-                    <input id="from" type="text" placeholder="مدينة المغادرة">
-                </div>
-                <div class="field">
-                    <label for="to">إلى</label>
-                    <input id="to" type="text" placeholder="مدينة الوصول">
-                </div>
-                <div class="field">
-                    <label for="depart">تاريخ المغادرة</label>
-                    <input id="depart" type="date">
-                </div>
-                <div class="field return-field">
-                    <label for="return">تاريخ العودة</label>
-                    <input id="return" type="date">
-                </div>
-                <div class="field">
-                    <label for="passengers">المسافرون</label>
-                    <select id="passengers">
-                        <option>1 مسافر</option><option>2 مسافرين</option>
-                        <option>3 مسافرين</option><option>4 مسافرين</option>
-                    </select>
-                </div>
-                <div class="field">
-                    <label for="class">درجة السفر</label>
-                    <select id="class">
-                        <option>السياحية</option><option>رجال الأعمال</option><option>الدرجة الأولى</option>
-                    </select>
-                </div>
-            </div>
-
-            <button class="search-btn" type="button">بحث عن الرحلات</button>
-        </div>
-    </section>
-
-    <section class="services" id="services">
-        <div class="section-title">
-            <span>خدمات الأقطار</span>
-            <h2>كل ما تحتاجه لرحلتك</h2>
-            <p>خدمات سفر وسياحة متكاملة في مكان واحد</p>
-        </div>
-
-        <div class="services-grid">
-            <a href="#contact" class="service-card">
-                <div class="service-icon">✈</div>
-                <h3>حجز تذاكر الطيران</h3>
-                <p>احجز رحلاتك إلى مختلف الوجهات مع خيارات متعددة ومتابعة مستمرة.</p>
-                <span class="service-link">استكشف الخدمة ←</span>
-            </a>
-            <a href="#contact" class="service-card">
-                <div class="service-icon">🏨</div>
-                <h3>حجز الفنادق</h3>
-                <p>خيارات متنوعة من الفنادق والإقامات في أهم الوجهات حول العالم.</p>
-                <span class="service-link">استكشف الخدمة ←</span>
-            </a>
-            <a href="#contact" class="service-card">
-                <div class="service-icon">🛂</div>
-                <h3>التأشيرات</h3>
-                <p>خدمات تقديم ومتابعة معاملات التأشيرات لمجموعة من الوجهات.</p>
-                <span class="service-link">استكشف الخدمة ←</span>
-            </a>
-            <a href="#contact" class="service-card">
-                <div class="service-icon">🚗</div>
-                <h3>رخصة القيادة الدولية</h3>
-                <p>خدمة إصدار رخصة القيادة الدولية بإجراءات سهلة وسريعة.</p>
-                <span class="service-link">استكشف الخدمة ←</span>
-            </a>
-        </div>
-    </section>
-
-    <section class="offers" id="offers">
-        <div class="section-title">
-            <span>عروض الأقطار</span>
-            <h2>اكتشف أحدث عروض السفر</h2>
-            <p>اختر وجهتك واستمتع بعروض مميزة لرحلتك القادمة</p>
-        </div>
-
-        <div class="offers-grid">
-            <a href="#contact" class="offer-card">
-                <div class="offer-image">
-                    <img src="images/istanbul.jpg" alt="إسطنبول" loading="lazy">
-                    <span class="offer-badge">عرض مميز</span>
-                </div>
-                <div class="offer-content">
-                    <span class="offer-country">تركيا</span>
-                    <h3>إسطنبول</h3>
-                    <p>اكتشف إسطنبول مع خيارات مميزة للفنادق والرحلات السياحية.</p>
-                    <span class="offer-link">عرض التفاصيل ←</span>
-                </div>
-            </a>
-
-            <a href="#contact" class="offer-card">
-                <div class="offer-image">
-                    <img src="images/mashhad.jpg" alt="مشهد" loading="lazy">
-                    <span class="offer-badge">الأكثر طلباً</span>
-                </div>
-                <div class="offer-content">
-                    <span class="offer-country">إيران</span>
-                    <h3>مشهد</h3>
-                    <p>رحلات وحجوزات فندقية وخدمات متكاملة لزيارة مدينة مشهد.</p>
-                    <span class="offer-link">عرض التفاصيل ←</span>
-                </div>
-            </a>
-
-            <a href="#contact" class="offer-card">
-                <div class="offer-image">
-                    <img src="images/dubai.jpg" alt="دبي" loading="lazy">
-                    <span class="offer-badge">وجهة مميزة</span>
-                </div>
-                <div class="offer-content">
-                    <span class="offer-country">الإمارات</span>
-                    <h3>دبي</h3>
-                    <p>استمتع بدبي مع خيارات الفنادق والتأشيرات والخدمات السياحية.</p>
-                    <span class="offer-link">عرض التفاصيل ←</span>
-                </div>
-            </a>
-        </div>
-
-        <div class="offers-more"><a href="#contact" class="primary-btn">عرض جميع العروض</a></div>
-    </section>
-
-    <section class="why-us" id="about">
-        <div class="section-title">
-            <span>لماذا الأقطار؟</span>
-            <h2>رحلتك معنا أسهل</h2>
-            <p>نهتم بتفاصيل رحلتك من بداية التخطيط وحتى الوصول</p>
-        </div>
-        <div class="features-grid">
-            <article class="feature"><div>✓</div><h3>خدمات متكاملة</h3><p>الطيران والفنادق والتأشيرات وخدمات السفر في مكان واحد.</p></article>
-            <article class="feature"><div>◎</div><h3>متابعة مستمرة</h3><p>متابعة طلباتك ومساعدتك في اختيار الخدمة المناسبة لرحلتك.</p></article>
-            <article class="feature"><div>★</div><h3>خيارات متنوعة</h3><p>حلول وخيارات متعددة تناسب مختلف الوجهات واحتياجات المسافرين.</p></article>
-            <article class="feature"><div>☎</div><h3>خدمة العملاء</h3><p>فريق جاهز لاستقبال استفساراتك ومساعدتك في خدمات السفر.</p></article>
-        </div>
-    </section>
-
-    <section class="cta" id="contact">
-        <div class="cta-inner">
-            <div>
-                <span>الأقطار للسفر والسياحة</span>
-                <h2>جاهز لرحلتك القادمة؟</h2>
-                <p>تواصل معنا للاستفسار عن الرحلات والفنادق والتأشيرات وبقية خدمات السفر.</p>
-            </div>
-            <a class="cta-btn" href="tel:+9647809000849">اتصل بنا</a>
-        </div>
-    </section>
+<section class="hero" id="home">
+ <div class="container hero-content"><span class="eyebrow" data-i18n="heroEyebrow">من النجف إلى العالم</span><h1 data-i18n="heroTitle">رحلتك تبدأ مع الأقطار</h1><p data-i18n="heroText">خدمات السفر والسياحة والتأشيرات ورخص القيادة الدولية في مكان واحد.</p><div class="hero-buttons"><a class="primary-btn light" href="#services" data-i18n="browseServices">استكشف خدماتنا</a><a class="outline-btn" href="https://wa.me/9647809000845" target="_blank" rel="noopener" data-i18n="whatsappUs">تواصل عبر واتساب</a></div></div>
+ <div class="container booking-box"><div class="booking-head"><h2 data-i18n="flightSearch">البحث عن الرحلات</h2><span class="status-pill" data-i18n="apiReady">جاهز للربط بنظام الحجز</span></div><div class="trip-types"><label><input type="radio" name="trip" value="round" checked> <span data-i18n="roundTrip">ذهاب وعودة</span></label><label><input type="radio" name="trip" value="oneway"> <span data-i18n="oneWay">ذهاب فقط</span></label></div><div class="search-grid"><label class="field"><span data-i18n="from">من</span><input type="text" placeholder="النجف NJF"></label><label class="field"><span data-i18n="to">إلى</span><input type="text" placeholder="دبي DXB"></label><label class="field"><span data-i18n="depart">المغادرة</span><input type="date"></label><label class="field return-field"><span data-i18n="return">العودة</span><input type="date"></label><label class="field"><span data-i18n="travelers">المسافرون</span><select><option>1</option><option>2</option><option>3</option><option>4</option><option>5+</option></select></label></div><button class="search-btn" id="flightSearchBtn" data-i18n="searchFlights">بحث الرحلات</button><p class="form-note" data-i18n="flightNote">سيتم تفعيل الأسعار والحجز المباشر عند ربط مزود الطيران API.</p></div>
+</section>
+<section class="section" id="services"><div class="container"><div class="section-title"><span data-i18n="ourServices">خدماتنا</span><h2 data-i18n="everythingTravel">كل ما تحتاجه للسفر</h2></div><div class="services-grid">
+<article class="service-card"><div class="icon">✈</div><h3 data-i18n="flights">حجز الطيران</h3><p data-i18n="flightsText">بحث وحجز الرحلات مع تجهيز النظام للربط بمزودي الأسعار.</p><a href="#home" data-i18n="startSearch">ابدأ البحث ←</a></article>
+<article class="service-card"><div class="icon">🏨</div><h3 data-i18n="hotels">حجز الفنادق</h3><p data-i18n="hotelsText">فنادق داخل وخارج العراق، مع قابلية الربط بمزود فنادق لاحقًا.</p><a href="#contact" data-i18n="requestNow">اطلب الآن ←</a></article>
+<article class="service-card"><div class="icon">🛂</div><h3 data-i18n="visas">التأشيرات</h3><p data-i18n="visasText">طلبات تأشيرات متعددة مع متطلبات مستقلة لكل دولة.</p><a href="#visas" data-i18n="viewVisas">عرض التأشيرات ←</a></article>
+<article class="service-card"><div class="icon">🚗</div><h3 data-i18n="idp">رخص القيادة الدولية</h3><p data-i18n="idpText">خيارات أمريكية وبريطانية بمدد إصدار مختلفة.</p><a href="#idp" data-i18n="viewOptions">عرض الخيارات ←</a></article>
+</div></div></section>
+<section class="section alt" id="visas"><div class="container"><div class="section-title"><span data-i18n="visaCenter">مركز التأشيرات</span><h2 data-i18n="visaTitle">اختر الدولة وأرسل متطلباتك</h2><p data-i18n="visaAdminNote">قائمة الدول قابلة للإضافة والإخفاء من لوحة الإدارة عند ربط النظام الخلفي.</p></div><div class="visa-grid">
+<article class="visa-card"><div class="flag">🇦🇪</div><h3>الإمارات العربية المتحدة</h3><p>جواز سفر، صورة شخصية، ومستمسكات إضافية حسب نوع الطلب.</p><button class="secondary-btn visa-order" data-service="تأشيرة الإمارات">اطلب الآن</button></article>
+<article class="visa-card"><div class="flag">🇸🇦</div><h3>المملكة العربية السعودية</h3><p>المتطلبات تحدد حسب نوع التأشيرة وأهلية مقدم الطلب.</p><button class="secondary-btn visa-order" data-service="تأشيرة السعودية">اطلب الآن</button></article>
+<article class="visa-card"><div class="flag">🇹🇷</div><h3>تركيا</h3><p>إمكانية إضافة أنواع التأشيرات والمتطلبات لكل فئة من لوحة الإدارة.</p><button class="secondary-btn visa-order" data-service="تأشيرة تركيا">اطلب الآن</button></article>
+<article class="visa-card"><div class="flag">🌍</div><h3 data-i18n="otherCountries">دول أخرى</h3><p data-i18n="otherCountriesText">تواصل معنا للتحقق من الدول والخدمات المتاحة حاليًا.</p><button class="secondary-btn visa-order" data-service="استفسار عن تأشيرة دولة أخرى" data-i18n="inquire">استفسر الآن</button></article>
+</div></div></section>
+<section class="section" id="idp"><div class="container"><div class="section-title"><span data-i18n="idpCenter">مركز الرخص الدولية</span><h2 data-i18n="idpPlans">خيارات الإصدار والأسعار</h2><p data-i18n="deliveryIncluded">جميع الأسعار أدناه شاملة أجور التوصيل.</p></div><div class="idp-groups">
+<div class="idp-group"><h3>🇺🇸 الأمريكية — دفتر + هوية</h3><div class="price-list">
+<div class="price-row"><div><b>10 سنوات — إصدار خلال 15 يوم</b><small>الخيار البطيء</small></div><strong data-iqd="55000">55,000 د.ع</strong><button class="order-btn" data-service="الرخصة الأمريكية 10 سنوات - 15 يوم - 55000">اطلب</button></div>
+<div class="price-row"><div><b>10 سنوات — إصدار خلال 7 أيام</b><small>سريعة</small></div><strong data-iqd="125000">125,000 د.ع</strong><button class="order-btn" data-service="الرخصة الأمريكية 10 سنوات - 7 أيام - 125000">اطلب</button></div>
+<div class="price-row"><div><b>5 سنوات — إصدار خلال 7 أيام</b><small>سريعة</small></div><strong data-iqd="100000">100,000 د.ع</strong><button class="order-btn" data-service="الرخصة الأمريكية 5 سنوات - 7 أيام - 100000">اطلب</button></div>
+<div class="price-row"><div><b>10 سنوات — إصدار خلال 72 ساعة</b><small>سريعة جدًا</small></div><strong data-iqd="195000">195,000 د.ع</strong><button class="order-btn" data-service="الرخصة الأمريكية 10 سنوات - 72 ساعة - 195000">اطلب</button></div>
+<div class="price-row"><div><b>5 سنوات — إصدار خلال 72 ساعة</b><small>سريعة جدًا</small></div><strong data-iqd="165000">165,000 د.ع</strong><button class="order-btn" data-service="الرخصة الأمريكية 5 سنوات - 72 ساعة - 165000">اطلب</button></div>
+</div></div>
+<div class="idp-group"><h3>🇬🇧 البريطانية</h3><div class="price-list">
+<div class="price-row"><div><b>دفتر فقط — سنة واحدة</b><small>إصدار خلال 24 ساعة</small></div><strong data-iqd="85000">85,000 د.ع</strong><button class="order-btn" data-service="الرخصة البريطانية دفتر فقط سنة - 85000">اطلب</button></div>
+<div class="price-row"><div><b>دفتر فقط — 3 سنوات</b><small>إصدار خلال 24 ساعة</small></div><strong data-iqd="125000">125,000 د.ع</strong><button class="order-btn" data-service="الرخصة البريطانية دفتر فقط 3 سنوات - 125000">اطلب</button></div>
+<div class="price-row"><div><b>دفتر + هوية — سنة واحدة</b><small>إصدار خلال 24 ساعة</small></div><strong data-iqd="125000">125,000 د.ع</strong><button class="order-btn" data-service="الرخصة البريطانية دفتر وهوية سنة - 125000">اطلب</button></div>
+<div class="price-row"><div><b>دفتر + هوية — 3 سنوات</b><small>إصدار خلال 24 ساعة</small></div><strong data-iqd="155000">155,000 د.ع</strong><button class="order-btn" data-service="الرخصة البريطانية دفتر وهوية 3 سنوات - 155000">اطلب</button></div>
+</div></div></div>
+<div class="requirements"><h3 data-i18n="requirements">المتطلبات</h3><div class="req-grid"><span>✓ صورة جواز السفر</span><span>✓ صورة شخصية</span><span>✓ إجازة السوق المحلية — الوجه الأمامي</span><span>✓ إجازة السوق المحلية — الوجه الخلفي</span></div></div>
+</div></section>
+<section class="section alt" id="offers"><div class="container"><div class="section-title"><span data-i18n="tourOffers">العروض السياحية</span><h2 data-i18n="destinations">وجهات مختارة</h2><p data-i18n="offersNoPrice">الأسعار متغيرة؛ اطلب السعر الحالي عبر واتساب.</p></div><div class="offers-grid">
+<article class="offer-card"><div class="offer-image"><img src="images/dubai.jpg" alt="دبي"></div><div class="offer-content"><span>الإمارات</span><h3>دبي</h3><p>فنادق مختارة، استقبال ونقل، وإمكانية ترتيب الطيران حسب تاريخ السفر.</p><button class="order-btn" data-service="عرض دبي السياحي">اطلب السعر</button></div></article>
+<article class="offer-card"><div class="offer-image"><img src="images/istanbul.jpg" alt="إسطنبول"></div><div class="offer-content"><span>تركيا</span><h3>إسطنبول</h3><p>إقامة وبرامج سياحية وخيارات نقل وجولات قابلة للتخصيص.</p><button class="order-btn" data-service="عرض إسطنبول السياحي">اطلب السعر</button></div></article>
+<article class="offer-card"><div class="offer-image"><img src="images/mashhad.jpg" alt="مشهد"></div><div class="offer-content"><span>إيران</span><h3>مشهد</h3><p>خيارات إقامة ونقل وبرامج سفر يتم تحديثها حسب الموسم.</p><button class="order-btn" data-service="عرض مشهد السياحي">اطلب السعر</button></div></article>
+</div></div></section>
+<section class="section" id="request"><div class="container request-layout"><div><div class="section-title align-start"><span data-i18n="serviceRequest">طلب خدمة</span><h2 data-i18n="sendRequest">جهّز طلبك قبل التواصل</h2></div><p data-i18n="uploadNotice">في هذه النسخة يمكنك اختيار الملفات للتحقق منها على جهازك فقط. رفعها وحفظها الآمن سيعمل بعد ربط الـBackend. لا يتم إرسال الملفات إلى واتساب تلقائيًا.</p></div><form class="request-form" id="requestForm"><label><span data-i18n="fullName">الاسم الكامل</span><input id="customerName" required></label><label><span data-i18n="phone">رقم الهاتف</span><input id="customerPhone" type="tel" required></label><label><span data-i18n="service">الخدمة</span><select id="serviceSelect" required><option value="">اختر الخدمة</option><option>تأشيرة</option><option>رخصة قيادة دولية</option><option>حجز طيران</option><option>حجز فندق</option><option>عرض سياحي</option><option>خدمة أخرى</option></select></label><label class="full"><span data-i18n="documents">المستمسكات (صور أو PDF)</span><input id="documents" type="file" multiple accept="image/*,.pdf"></label><label class="full"><span data-i18n="notes">ملاحظات</span><textarea id="notes" rows="4"></textarea></label><button class="search-btn full" type="submit" data-i18n="continueWhatsapp">متابعة عبر واتساب</button></form></div></section>
+<section class="section alt" id="companies"><div class="container company-box"><div><span class="eyebrow dark" data-i18n="companiesPortal">بوابة الشركات</span><h2 data-i18n="companyTitle">حسابات خاصة للشركات والوكلاء</h2><p data-i18n="companyText">النظام المخطط يشمل الرصيد، الحد الائتماني، الأسعار الخاصة، كشف الحساب PDF، الطلبات والإيداعات والاسترجاعات. إنشاء الحسابات سيكون من الإدارة فقط.</p></div><button class="disabled-btn" disabled data-i18n="comingBackend">تتفعّل بعد ربط النظام الخلفي</button></div></section>
+<section class="cta" id="contact"><div class="container cta-inner"><div><h2 data-i18n="contactTitle">نحن جاهزون لخدمتك</h2><p>النجف الأشرف — شارع الغدير — كرامة</p><p>alaqtartourism@gmail.com</p><p dir="ltr">+964 780 900 0845 &nbsp; | &nbsp; +964 780 900 0846 &nbsp; | &nbsp; +964 780 900 0847 &nbsp; | &nbsp; +964 780 900 0849</p></div><div class="contact-buttons"><a class="cta-btn" href="https://wa.me/9647809000845" target="_blank" rel="noopener">WhatsApp</a><a class="cta-btn ghost" href="mailto:alaqtartourism@gmail.com">Email</a></div></div></section>
 </main>
-
-<footer class="footer">
-    <div class="container footer-inner">
-        <img src="images/logo.png" alt="ALAQTAR Travel & Tourism">
-        <p>© <span id="year"></span> الأقطار للسفر والسياحة. جميع الحقوق محفوظة.</p>
-    </div>
-</footer>
-
+<footer class="footer"><div class="container footer-inner"><img src="images/logo.png" alt="ALAQTAR"><div><b>الأقطار للسفر والسياحة</b><p>ALAQTAR Travel & Tourism</p></div><div class="social"><a href="https://www.facebook.com/share/1DkrTSNg9z/" target="_blank" rel="noopener">Facebook</a><a href="https://www.instagram.com/alaqtar.iq?stkn=bmhtYXExZnB1d2pr" target="_blank" rel="noopener">Instagram</a></div><p>© <span id="year"></span> ALAQTAR</p></div></footer>
+<div class="toast" id="toast"></div>
 <script src="js/main.js"></script>
-</body>
-</html>
+</body></html>
