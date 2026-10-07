@@ -19,9 +19,33 @@ app.config.update(
     SESSION_COOKIE_SAMESITE="Lax",
 )
 
+class DBConnection:
+    def __init__(self):
+        self.con = psycopg2.connect(
+            DATABASE_URL,
+            cursor_factory=RealDictCursor
+        )
+
+    def cursor(self):
+        return self.con.cursor()
+
+    def execute(self, query, params=None):
+        cur = self.con.cursor()
+        cur.execute(query, params or ())
+        return cur
+
+    def commit(self):
+        self.con.commit()
+
+    def rollback(self):
+        self.con.rollback()
+
+    def close(self):
+        self.con.close()
+
+
 def db():
-    con = psycopg2.connect(DATABASE_URL, cursor_factory=RealDictCursor)
-    return con
+    return DBConnection()
 
 def init_db():
     con = db()
