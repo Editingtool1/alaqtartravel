@@ -25,7 +25,7 @@ def db():
 
 def init_db():
     con = db()
-    con.executescript("""
+    con.execute("""
     CREATE TABLE IF NOT EXISTS orders (
       id SERIAL PRIMARY KEY,
       order_no TEXT UNIQUE NOT NULL,
