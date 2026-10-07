@@ -567,7 +567,7 @@ body {
         font-size: 7px;
     }
 }
-
+@media (max-width: 650px) {
     .logo-mark {
         width: 41px;
         height: 41px;
@@ -605,7 +605,7 @@ body {
     .section-title h2 {
         font-size: 25px;
     }
-
+}
 /* ===== ALAQTAR HEADER LOGO ===== */
 .header .brand-logo {
     width: 190px;
