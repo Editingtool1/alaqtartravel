@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded',()=>{
+const initALAQTAR = () => {
  const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s), wa='9647809000845';
  const nav=$('.nav'),toggle=$('.menu-toggle'),ret=$('.return-field'),toast=$('#toast');
  $('#year').textContent=new Date().getFullYear();
@@ -61,4 +61,10 @@ document.addEventListener('DOMContentLoaded',()=>{
  const ar={navHome:'الرئيسية',navServices:'الخدمات',navVisas:'التأشيرات',navIdp:'الرخص الدولية',navOffers:'العروض',navContact:'اتصل بنا',companyLogin:'دخول الشركات'};
  const en={navHome:'Home',navServices:'Services',navVisas:'Visas',navIdp:'International License',navOffers:'Offers',navContact:'Contact',companyLogin:'Companies Login'};
  let english=false;$('#langBtn').onclick=()=>{english=!english;document.documentElement.lang=english?'en':'ar';document.documentElement.dir=english?'ltr':'rtl';$('#langBtn').textContent=english?'AR':'EN';const d=english?en:ar;Object.entries(d).forEach(([k,v])=>{const el=document.querySelector(`[data-i18n="${k}"]`);if(el)el.textContent=v});show(english?'English interface enabled. Full content translation will be managed in the next backend phase.':'تم تفعيل الواجهة العربية.')};
-});
+};
+
+if (document.readyState === 'loading') {
+ document.addEventListener('DOMContentLoaded', initALAQTAR);
+} else {
+ initALAQTAR();
+}
