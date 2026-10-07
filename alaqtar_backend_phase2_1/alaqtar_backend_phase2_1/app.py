@@ -4,11 +4,17 @@ from psycopg2.extras import RealDictCursor
 from datetime import datetime
 from functools import wraps
 from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify
+from flask_cors import CORS
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATABASE_URL = os.environ.get("DATABASE_URL", "")
 
 app = Flask(__name__)
+CORS(app, resources={
+    r"/api/*": {
+        "origins": "https://editingtool1.github.io"
+    }
+})
 app.secret_key = os.environ.get("SECRET_KEY", "")
 ADMIN_USER = os.environ.get("ADMIN_USER", "")
 ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD", "")
