@@ -197,7 +197,9 @@ def order_files(order_no):
         "order_files.html",
         order=order,
         files=files
-    )@app.get("/admin/files/<int:file_id>")
+    )
+
+@app.get("/admin/files/<int:file_id>")
 @login_required
 def admin_file(file_id):
     con = db()
