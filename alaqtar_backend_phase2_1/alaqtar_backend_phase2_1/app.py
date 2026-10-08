@@ -252,11 +252,14 @@ def admin_file(file_id):
     if not signed_path:
         return "تعذر إنشاء رابط المستمسك", 500
 
-    if signed_path.startswith("http"):
+    if signed_path.startswith("http://") or signed_path.startswith("https://"):
         signed_url = signed_path
-    else:
+    elif signed_path.startswith("/storage/v1/"):
         signed_url = f"{SUPABASE_URL}{signed_path}"
-
+    elif signed_path.startswith("/object/"):
+        signed_url = f"{SUPABASE_URL}/storage/v1{signed_path}"
+    else:
+        signed_url = f"{SUPABASE_URL}/storage/v1/{signed_path.lstrip('/')}"
     return redirect(signed_url)
 @app.post("/admin/orders/<int:oid>/status")
 @login_required
